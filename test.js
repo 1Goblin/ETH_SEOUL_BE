@@ -13,7 +13,6 @@ const app = express();
 mongoose
   .connect(process.env.MONGO_URL, {
     connectTimeoutMS: 30000, // Increase timeout to 30 seconds
-
     socketTimeoutMS: 45000,
   })
 
@@ -23,8 +22,6 @@ mongoose
     // Middleware
 
     app.use(express.json());
-
-    app.use("/api/auth", authRoute);
 
     // Start the Express server
 
