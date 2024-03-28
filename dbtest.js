@@ -25,7 +25,7 @@ mongoose
     });
 
     // 모델 생성
-    const ExampleModel = mongoose.model("Example", exampleSchema);
+    const ExampleModel = mongoose.model("idol", exampleSchema);
 
     // 예제 데이터 생성 및 저장
     const exampleData = new ExampleModel({

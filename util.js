@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken"; //npm install jsonwebtoken 이거 해줘야함
-import config from "./config";
+const jwt = require("jsonwebtoken"); //npm install jsonwebtoken 이거 해줘야함
+
 const getToken = (user) => {
   return jwt.sign(
     {
@@ -33,4 +33,4 @@ const isAuth = (req, res, next) => {
   }
 };
 
-export { getToken, isAuth };
+module.exports = { getToken, isAuth };
