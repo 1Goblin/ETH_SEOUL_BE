@@ -8,7 +8,7 @@ const router = express.Router();
 // 사용자 로그인
 router.post("/login", async (req, res) => {
   try {
-    const { walletAddress } = req.body;
+    const { walletAddress } = req.body.address;
     const user = await User.findOne({ walletAddress });
     if (!user) {
       // 사용자가 존재하지 않을 경우, 클라이언트에게 리다이렉트 URL을 제공

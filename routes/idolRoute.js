@@ -5,7 +5,7 @@ const { getToken, isAuth } = require("../util");
 
 const router = express.Router();
 
-//아이돌 토탈토큰 정렬하기
+//아이돌 토탈토큰 정렬하기 전체 아이돌랭킹
 router.put("/rank", async (req, res) => {
   try {
     // 아이돌들의 정보를 데이터베이스에서 가져옴
@@ -26,7 +26,7 @@ router.put("/rank", async (req, res) => {
 router.put("/idolProfile/:idolId", async (req, res) => {
   try {
     const { idolId } = req.params;
-    const idol = await Idol.findById(idolId);
+    const idol = await Idol.findOne(idolId);
     if (!idol) {
       return res.status(404).json({ message: "아이돌을 찾을 수 없습니다." });
     }
@@ -43,7 +43,7 @@ router.put("/idolTopFans/:idolId", async (req, res) => {
     const { idolId } = req.params;
 
     // 해당 아이돌의 정보 가져오기
-    const idol = await Idol.findById(idolId);
+    const idol = await Idol.findOne({ idolId: idolId });
     if (!idol) {
       return res.status(404).json({ message: "아이돌을 찾을 수 없습니다." });
     }
@@ -62,9 +62,9 @@ router.put("/idolTopFans/:idolId", async (req, res) => {
     const topFans = users.slice(0, 10).map((user) => ({
       userId: user._id,
       nickname: user.nickname,
-      token: user.myIdols.find((item) => item.idolId === idolId).token,
+      token: user.myIdols.find((item) => item.idolId === idolId).token, //item.idolId는 나의아이돌의 idolid를 가리킴 item은 myidol
     }));
-
+    console.log(topFans);
     res.json(topFans);
   } catch (error) {
     console.error("Error fetching top fans for idol:", error);

@@ -8,10 +8,11 @@ dotenv.config();
 
 const app = express();
 
-// const authRouter = require("./routes/auth"); // 해당 파일에서 정의한 라우트를 객체화 함
 const voteRouter = require("./routes/voteRoute");
 const userRouter = require("./routes/userRoute");
 const idolRouter = require("./routes/idolRoute");
+const periodRouter = require("./routes/periodRoute");
+const rankRouter = require("./routes/rankRoute");
 
 // Mongoose connection without the deprecated options
 
@@ -27,10 +28,11 @@ mongoose
     // Middleware
 
     app.use(express.json()); // app.use로 미들웨어로 등록해서 json데이터를 javascript객체로 변환
-    // app.use("/api", authRouter); // authRouter에서 정의된 모든 경로에 자동으로 /api 붙임
     app.use("/api/vote", voteRouter);
     app.use("/api/user", userRouter);
     app.use("/api/idol", idolRouter);
+    app.use("/api/period", periodRouter);
+    app.use("/api/rank", rankRouter);
     // Start the Expr3qess server
 
     app.listen(8800, () => {
