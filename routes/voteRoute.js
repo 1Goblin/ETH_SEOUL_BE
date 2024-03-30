@@ -10,10 +10,11 @@ router.post(
   "/",
   /*isAuth, */ async (req, res) => {
     try {
-      const { idolId, userId, paidTokens } = req.body;
-      const user = await User.findById({ userId: userId }); //req.user._id
+      const { idolId, walletAddress, paidTokens } = req.body;
+      const user = await User.findOne({ walletAddress: walletAddress }); //req.user._id
       //req.user._id에 지갑주소나 유저정보 아이디 들어가야함  findById는 몽고디비 메서드함수이고 _id아이디를 찾아줌 테스트하고싶으면 user의 _id 넣어보세요
       const idol = await Idol.findOne({ idolId: idolId });
+      console.log(idol);
 
       if (!user) {
         return res.status(404).send({ message: "사용자를 찾을 수 없습니다." });
@@ -27,7 +28,7 @@ router.post(
         //토큰수 1미만이면 토큰부족
         return res
           .status(400)
-          .send({ message: "투표를 위한 토큰이 부족합니다." });
+          .send({ message: "1개 이상의 토큰을 입력하세요" });
       }
 
       // 아이돌의 토탈토큰 수 증가
