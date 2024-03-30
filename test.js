@@ -3,6 +3,7 @@ const User = require("./models/User");
 const mongoose = require("mongoose");
 const router = require("express").Router();
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 dotenv.config();
 
@@ -14,6 +15,10 @@ const idolRouter = require("./routes/idolRoute");
 const periodRouter = require("./routes/periodRoute");
 const rankRouter = require("./routes/rankRoute");
 const commuRouter = require("./routes/commuRoute");
+
+app.use(cors({
+  origin: 'http://localhost:3000' // 클라이언트 애플리케이션의 도메인으로 대체하세요.
+}));
 
 // Mongoose connection without the deprecated options
 

@@ -8,8 +8,9 @@ const router = express.Router();
 // 사용자 로그인
 router.post("/login", async (req, res) => {
   try {
-    const { walletAddress } = req.body.address;
-    const user = await User.findOne({ walletAddress });
+    const { walletAddress } = req.body;
+    console.log(walletAddress)
+    const user = await User.findOne({ walletAddress: walletAddress });
     if (!user) {
       // 사용자가 존재하지 않을 경우, 클라이언트에게 리다이렉트 URL을 제공
       console.log("사용자가 존재하지 않음");
@@ -20,7 +21,7 @@ router.post("/login", async (req, res) => {
       _id: user.id,
       nickname: user.nickname,
       walletAddress: user.walletAddress,
-      token: getToken(user),
+      
     });
   } catch (error) {
     res.status(500).send({ message: "로그인 중 오류가 발생했습니다." });
