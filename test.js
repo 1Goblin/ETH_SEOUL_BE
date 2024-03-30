@@ -13,6 +13,7 @@ const userRouter = require("./routes/userRoute");
 const idolRouter = require("./routes/idolRoute");
 const periodRouter = require("./routes/periodRoute");
 const rankRouter = require("./routes/rankRoute");
+const commuRouter = require("./routes/commuRoute");
 
 // Mongoose connection without the deprecated options
 
@@ -33,6 +34,7 @@ mongoose
     app.use("/api/idol", idolRouter);
     app.use("/api/period", periodRouter);
     app.use("/api/rank", rankRouter);
+    app.use("api/commu", commuRouter);
     // Start the Expr3qess server
 
     app.listen(8800, () => {
