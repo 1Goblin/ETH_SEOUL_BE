@@ -12,7 +12,7 @@ router.put("/rank", async (req, res) => {
     const idols = await Idol.find(); //find()하면 전체 아이돌 정보가 들어감
 
     // 토큰 양을 오름차순으로 정렬
-    idols.sort((a, b) => a.totalTokens - b.totalTokens);
+    idols.sort((a, b) => b.totalTokens - a.totalTokens);
 
     // 정렬된 아이돌 정보를 클라이언트에 응답
     res.json(idols);

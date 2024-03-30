@@ -6,15 +6,16 @@ const { getToken, isAuth } = require("../util");
 const router = express.Router();
 
 // 아이돌에게 투표하기
-router.post(
-  "/",
-  /*isAuth, */ async (req, res) => {
+router.post("/vote", async (req, res) => {
     try {
       const { idolId, walletAddress, paidTokens } = req.body;
       const user = await User.findOne({ walletAddress: walletAddress }); //req.user._id
       //req.user._id에 지갑주소나 유저정보 아이디 들어가야함  findById는 몽고디비 메서드함수이고 _id아이디를 찾아줌 테스트하고싶으면 user의 _id 넣어보세요
       const idol = await Idol.findOne({ idolId: idolId });
-      console.log(idol);
+
+      console.log(idolId,"ddfdfdf");
+      console.log(walletAddress, "wallet")
+      console.log(paidTokens, "paid")
 
       if (!user) {
         return res.status(404).send({ message: "사용자를 찾을 수 없습니다." });
