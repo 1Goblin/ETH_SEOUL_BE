@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Rank = require("../models/rank");
 
+//단일 아이돌 기간마다 랭킹정보
 router.post("/:idolId", async (req, res) => {
   try {
     const { idolId } = req.params;
